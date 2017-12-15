@@ -18,7 +18,7 @@ for password in passlist:
         for tempword in tempwordlist:
             tmptmp = list(tempword)
             if len(tmptmp) != len(w):
-                break
+                continue
             else:
                 print("%s vs %s" %  (tmptmp, w))
                 for letter in w:
