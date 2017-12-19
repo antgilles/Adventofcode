@@ -1,41 +1,31 @@
 import operator
 import copy
+import sys
+
 
 
 with open("advent13big.txt") as f:
     lines = [i.strip() for i in f.readlines()]
 
-fwinit = {}
+fw = {}
 
 for line in lines:
     line = [i.replace(":", "") for i in line.split()]
-    if int(line[0]) not in fwinit:
+    if int(line[0]) not in fw:
         # FW [DEPTH, CUR, DIRECTION]
-        fwinit[int(line[0])] = [int(line[1]),0,operator.add]
+        fw[int(line[0])] = int(line[1])
 
-#print(fw)
+for delay in range(10000000):
+    if delay % 1000 == 0:
+        print(delay)
+    caught = 0
+    for iteration in range(delay, max(fw.keys()) + 1 + delay):
+        pos = iteration - delay
+        #print ("===============iteration %s" % iteration )
+        if pos in fw and (iteration % (fw[pos] * 2 - 2)) == 0:
+            #print("caught")
+            caught = 1
 
-
-for delay in range(10000):
-	print('#### DELAY = %s' % delay)
-	fw = copy.deepcopy(fwinit)
-	#print fw
-	caught=0
-	for iteration in range(max(fw.keys()) + delay + 1 ):
-	    #print ("===============iteration %s" % iteration )
-	    #print("pos : %s" % str(iteration - delay))
-	    if iteration - delay in fw and fw[iteration - delay][1]==0:
-		print("caught")
-		caught=1
-		break
-	    for level, values in fw.items():
-		values[1] = values[2](values[1],1)
-		if values[1] == 0:
-		    values[2] = operator.add
-		elif  values[1] == values[0] - 1:
-		    values[2] = operator.sub
-#		print(fw)
-#	    print(caught)
-	if not caught:
-		print(delay) 
-	   	break 
+    if caught == 0:
+       print(delay)
+       break
