@@ -1,7 +1,7 @@
 import functools
 
 def getinput(s):
-    length = [ord(i) for i in phrase] + [17, 31, 73, 47, 23]
+    length = [ord(i) for i in s] + [17, 31, 73, 47, 23]
     return length
 
 def getdensehash(l):
@@ -32,8 +32,8 @@ def gethash(s):
     h = ''.join(['{:02x}'.format(i) for i in densehash])
     return h
 
-phrase = '225,171,131,2,35,5,0,13,1,246,54,97,255,98,254,110'
-phrase = '1,2,3'
+#phrase = '225,171,131,2,35,5,0,13,1,246,54,97,255,98,254,110'
+#phrase = '1,2,3'
 #phrase = 'flqrgnkx-0'
 
-print(gethash(phrase))
+#print(gethash(phrase))
